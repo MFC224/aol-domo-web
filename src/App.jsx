@@ -5,6 +5,7 @@ import CompaniesLoop from './components/CompaniesLoop';
 import EcosystemGrid from './components/EcosystemGrid';
 import PatrimonialHeritage from './components/PatrimonialHeritage';
 import FounderStory from './components/FounderStory';
+import LocationSection from './components/LocationSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import CompanyModal from './components/CompanyModal';
@@ -41,6 +42,9 @@ export default function App() {
 
         {/* Historia del Fundador: Rafael Francisco Ochoa Rodríguez ("Rafo8a") */}
         <FounderStory />
+
+        {/* Ubicación Estratégica y Mapa Google Maps de AOL en Cusco */}
+        <LocationSection />
 
         {/* Sección de Contacto Corporativo & Cotización WhatsApp */}
         <ContactSection />

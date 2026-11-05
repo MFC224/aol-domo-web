@@ -31,40 +31,40 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="py-24 bg-obsidian-900 relative">
+    <section id="contacto" className="py-16 sm:py-24 bg-obsidian-900 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
           
           {/* Left Column: Direct Contact Details */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-5 sm:space-y-6">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-amberGold block mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-amberGold block mb-2">
                 Atención Directa
               </span>
-              <h2 className="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+              <h2 className="font-display font-bold text-2xl sm:text-4xl text-white tracking-tight">
                 Inicie su Proyecto con AOL-DOMO
               </h2>
-              <p className="mt-3 text-sm text-slate-300 font-sans leading-relaxed">
+              <p className="mt-3 text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
                 Coordinación directa con la dirección ejecutiva de Rafael Francisco Ochoa Rodríguez para adquisiciones, desarrollo de hábitats, colecciones textiles y consultoría técnica.
               </p>
             </div>
 
-            <div className="space-y-4 pt-4">
+            <div className="space-y-3.5 pt-2">
               <a
                 href="https://wa.me/51944100990?text=Hola%20Rafael,%20deseo%20contactarme%20con%20AOL-DOMO"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-obsidian-950 border border-white/5 hover:border-amberGold/40 transition-colors group"
+                className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-obsidian-950 border border-white/10 hover:border-amberGold/40 transition-colors group active:scale-98"
               >
-                <div className="p-3 rounded-xl bg-forest-900/60 text-forest-300 group-hover:bg-amberGold group-hover:text-obsidian-950 transition-colors">
-                  <Phone className="w-5 h-5" />
+                <div className="p-3.5 rounded-xl bg-forest-900/60 text-forest-300 group-hover:bg-amberGold group-hover:text-obsidian-950 transition-colors flex-shrink-0">
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-semibold uppercase text-slate-400 tracking-wider block">
+                  <span className="text-xs font-bold uppercase text-slate-400 tracking-wider block">
                     Teléfono & WhatsApp
                   </span>
-                  <span className="text-base font-semibold text-white tracking-wide">
+                  <span className="text-base sm:text-lg font-bold text-white tracking-wide">
                     +51 944 100 990
                   </span>
                 </div>
@@ -72,54 +72,62 @@ export default function ContactSection() {
 
               <a
                 href="mailto:aol-domo@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-obsidian-950 border border-white/5 hover:border-amberGold/40 transition-colors group"
+                className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-obsidian-950 border border-white/10 hover:border-amberGold/40 transition-colors group active:scale-98"
               >
-                <div className="p-3 rounded-xl bg-forest-900/60 text-forest-300 group-hover:bg-amberGold group-hover:text-obsidian-950 transition-colors">
-                  <Mail className="w-5 h-5" />
+                <div className="p-3.5 rounded-xl bg-forest-900/60 text-forest-300 group-hover:bg-amberGold group-hover:text-obsidian-950 transition-colors flex-shrink-0">
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-semibold uppercase text-slate-400 tracking-wider block">
+                  <span className="text-xs font-bold uppercase text-slate-400 tracking-wider block">
                     Correos Electrónicos
                   </span>
-                  <span className="text-sm font-semibold text-white block">
+                  <span className="text-sm sm:text-base font-semibold text-white block">
                     aol-domo@gmail.com
                   </span>
-                  <span className="text-xs text-slate-400 block">
+                  <span className="text-xs sm:text-sm text-slate-400 block">
                     rafo8a@gmail.com
                   </span>
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-obsidian-950 border border-white/5">
-                <div className="p-3 rounded-xl bg-forest-900/60 text-forest-300">
-                  <MapPin className="w-5 h-5" />
+              <a
+                href="#ubicacion"
+                className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-obsidian-950 border border-white/10 hover:border-amberGold/40 transition-colors group active:scale-98"
+              >
+                <div className="p-3.5 rounded-xl bg-forest-900/60 text-forest-300 group-hover:bg-amberGold group-hover:text-obsidian-950 transition-colors flex-shrink-0">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <span className="text-[11px] font-semibold uppercase text-slate-400 tracking-wider block">
-                    Sede Central
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase text-slate-400 tracking-wider block">
+                      Sede Central AOL
+                    </span>
+                    <span className="text-xs text-amberGold font-semibold group-hover:underline flex items-center gap-0.5">
+                      Ver mapa ↓
+                    </span>
+                  </div>
+                  <span className="text-sm sm:text-base font-bold text-white block mt-0.5">
+                    Jr. Humberto Luna 105, Urb. Magisterial
                   </span>
-                  <span className="text-sm font-semibold text-white">
-                    Jr. Humberto Luna 105, Urb. Magisterial 1era etapa
-                  </span>
-                  <span className="text-xs text-slate-400 block">
-                    Cusco, Perú
+                  <span className="text-xs sm:text-sm text-slate-300 block">
+                    Wanchaq, Cusco 05184 • Perú
                   </span>
                 </div>
-              </div>
+              </a>
             </div>
 
             {/* Quick Badge */}
-            <div className="p-4 rounded-2xl bg-forest-950/60 border border-forest-700/30">
-              <span className="text-xs font-semibold text-forest-300 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-amberGold" />
-                Atención a clientes particulares, empresas e instituciones
+            <div className="p-4 rounded-2xl bg-forest-950/70 border border-forest-700/40">
+              <span className="text-xs sm:text-sm font-semibold text-forest-200 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-amberGold flex-shrink-0" />
+                <span>Atención a clientes particulares, empresas e instituciones</span>
               </span>
             </div>
           </div>
 
           {/* Right Column: Interactive Consultation Form */}
           <div className="lg:col-span-7">
-            <div className="glass-panel p-6 sm:p-10 rounded-3xl border border-white/10 shadow-2xl">
+            <div className="glass-panel p-5 sm:p-10 rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl">
               <h3 className="font-display font-bold text-xl sm:text-2xl text-white mb-6">
                 Formulario de Consulta Directa
               </h3>
@@ -128,13 +136,13 @@ export default function ContactSection() {
                 
                 {/* Division Selector */}
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+                  <label className="block text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-2">
                     División o Empresa de Interés
                   </label>
                   <select
                     value={selectedDivision}
                     onChange={(e) => setSelectedDivision(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-white/10 text-slate-100 text-sm focus:outline-none focus:border-amberGold transition-colors"
+                    className="w-full px-4 py-3.5 rounded-xl bg-obsidian-950 border border-white/10 text-white text-base focus:outline-none focus:border-amberGold transition-colors"
                   >
                     {divisions.map((d, i) => (
                       <option key={i} value={d} className="bg-obsidian-950 text-white">
@@ -147,7 +155,7 @@ export default function ContactSection() {
                 {/* Name & Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+                    <label className="block text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
                       Nombre Completo *
                     </label>
                     <input
@@ -156,12 +164,12 @@ export default function ContactSection() {
                       placeholder="Ej. Juan Pérez"
                       value={formData.nombre}
                       onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-white/10 text-slate-100 text-sm focus:outline-none focus:border-amberGold transition-colors"
+                      className="w-full px-4 py-3.5 rounded-xl bg-obsidian-950 border border-white/10 text-white text-base focus:outline-none focus:border-amberGold transition-colors placeholder:text-slate-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+                    <label className="block text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
                       Teléfono / WhatsApp *
                     </label>
                     <input
@@ -170,14 +178,14 @@ export default function ContactSection() {
                       placeholder="+51 987 654 321"
                       value={formData.telefono}
                       onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-white/10 text-slate-100 text-sm focus:outline-none focus:border-amberGold transition-colors"
+                      className="w-full px-4 py-3.5 rounded-xl bg-obsidian-950 border border-white/10 text-white text-base focus:outline-none focus:border-amberGold transition-colors placeholder:text-slate-500"
                     />
                   </div>
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label className="block text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
                     Correo Electrónico
                   </label>
                   <input
@@ -185,13 +193,13 @@ export default function ContactSection() {
                     placeholder="correo@ejemplo.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-white/10 text-slate-100 text-sm focus:outline-none focus:border-amberGold transition-colors"
+                    className="w-full px-4 py-3.5 rounded-xl bg-obsidian-950 border border-white/10 text-white text-base focus:outline-none focus:border-amberGold transition-colors placeholder:text-slate-500"
                   />
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label className="block text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
                     Detalles de su Requerimiento *
                   </label>
                   <textarea
@@ -200,14 +208,14 @@ export default function ContactSection() {
                     placeholder="Describa su proyecto, ubicación (ej. Valle Sagrado, Cusco, etc.), medidas o dudas para que podamos orientarle adecuadamente..."
                     value={formData.mensaje}
                     onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-white/10 text-slate-100 text-sm focus:outline-none focus:border-amberGold transition-colors resize-none"
+                    className="w-full px-4 py-3.5 rounded-xl bg-obsidian-950 border border-white/10 text-white text-base focus:outline-none focus:border-amberGold transition-colors resize-none placeholder:text-slate-500"
                   />
                 </div>
 
                 {/* Submit CTA */}
                 <button
                   type="submit"
-                  className="w-full mt-2 flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-amberGold hover:bg-amberGold-light text-obsidian-950 font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg shadow-amberGold/15"
+                  className="w-full mt-2 flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-amberGold hover:bg-amberGold-light text-obsidian-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 shadow-lg shadow-amberGold/20 active:scale-98"
                 >
                   <Send className="w-4 h-4" />
                   <span>Enviar Consulta vía WhatsApp</span>
@@ -215,7 +223,7 @@ export default function ContactSection() {
                 </button>
 
                 {submitted && (
-                  <p className="text-xs text-forest-400 text-center mt-2 font-medium">
+                  <p className="text-xs sm:text-sm text-forest-300 text-center mt-2 font-semibold">
                     Redirigiendo a WhatsApp de Rafael Francisco Ochoa...
                   </p>
                 )}

@@ -47,3 +47,19 @@
 .pause-marquee:hover .animate-marquee {
   animation-play-state: paused;
 }
+
+/* Hide scrollbar for clean touch horizontal sliders */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Touch targets and mobile typography clarity */
+@media (max-width: 640px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
