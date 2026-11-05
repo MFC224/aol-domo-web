@@ -5,19 +5,18 @@ import { useSwipe } from '../hooks/useSwipe';
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const banners = holdingData.banners;
 
   const SLIDE_DURATION = 7000; // 7 segundos continuos
 
-  // Auto-advance carousel every 7 seconds
+  // Auto-advance carousel every 7 seconds (continuous cycle 1 -> 5 -> 1)
   useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % banners.length);
     }, SLIDE_DURATION);
-    return () => clearInterval(interval);
-  }, [isPaused, banners.length]);
+
+    return () => clearInterval(timer);
+  }, [currentSlide, banners.length]);
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + banners.length) % banners.length);
@@ -38,8 +37,6 @@ export default function HeroBanner() {
     <section 
       id="hero" 
       className="relative min-h-[90vh] flex flex-col justify-between pt-20 sm:pt-28 pb-10 overflow-hidden bg-obsidian-950"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
       {/* Background subtle radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(30,86,54,0.22),rgba(6,8,10,0))]" />
@@ -109,17 +106,6 @@ export default function HeroBanner() {
             </button>
           </div>
 
-          {/* 7-Second Animated Progress Bar */}
-          <div className="w-full h-1 bg-white/10 relative overflow-hidden">
-            <div
-              key={currentSlide}
-              className="h-full bg-amberGold"
-              style={{
-                animation: !isPaused ? `progress-fill ${SLIDE_DURATION}ms linear forwards` : 'none'
-              }}
-            />
-          </div>
-
           {/* Docked Info Bar: Clean, Minimalist, No 'Paso 7s' label and No 'Ampliar' button */}
           <div className="p-4 sm:p-5 bg-obsidian-950/95 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="max-w-2xl">
@@ -136,22 +122,35 @@ export default function HeroBanner() {
 
             {/* Carousel Dots & Counter */}
             <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
-              <div className="flex items-center gap-1.5 bg-obsidian-900 px-3 py-1.5 rounded-full border border-white/10">
-                {banners.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentSlide(idx)}
-                    aria-label={`Ir al banner ${idx + 1}`}
-                    className={`transition-all duration-300 rounded-full ${
-                      idx === currentSlide 
-                        ? 'w-6 h-2 bg-amberGold' 
-                        : 'w-2 h-2 bg-white/30 hover:bg-white/60'
-                    }`}
-                  />
-                ))}
+              <div className="flex items-center gap-1.5 bg-obsidian-900/90 px-3 py-1.5 rounded-full border border-white/10 shadow-inner">
+                {banners.map((_, idx) => {
+                  const isActive = idx === currentSlide;
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentSlide(idx)}
+                      aria-label={`Ir al banner ${idx + 1}`}
+                      className={`relative overflow-hidden transition-all duration-300 rounded-full ${
+                        isActive 
+                          ? 'w-7 sm:w-8 h-2 bg-amberGold/25 border border-amberGold/30' 
+                          : 'w-2 h-2 bg-slate-500/40 hover:bg-slate-300/70'
+                      }`}
+                    >
+                      {isActive && (
+                        <span
+                          key={currentSlide}
+                          className="absolute inset-y-0 left-0 bg-amberGold rounded-full block shadow-sm shadow-amberGold/50"
+                          style={{
+                            animation: `progress-fill ${SLIDE_DURATION}ms linear forwards`
+                          }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
               </div>
 
-              <span className="text-xs text-slate-300 font-mono bg-obsidian-900 px-3 py-1.5 rounded-lg border border-white/10">
+              <span className="text-xs text-slate-300 font-mono bg-obsidian-900/90 px-3 py-1.5 rounded-lg border border-white/10 tracking-wider">
                 {String(currentSlide + 1).padStart(2, '0')} / {String(banners.length).padStart(2, '0')}
               </span>
             </div>
