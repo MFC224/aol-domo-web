@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { GraduationCap, Award, Compass, Sparkles, MapPin, CheckCircle, ZoomIn, X } from 'lucide-react';
+import { GraduationCap, Award, Sparkles, MapPin, ZoomIn } from 'lucide-react';
 import { holdingData } from '../data/ecosystem';
+import ImageLightbox from './common/ImageLightbox';
 
 export default function FounderStory() {
   const [fullscreenCurriculum, setFullscreenCurriculum] = useState(false);
@@ -176,43 +177,13 @@ export default function FounderStory() {
       </div>
 
       {/* Lightbox for full curriculum document */}
-      {fullscreenCurriculum && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-black/95 backdrop-blur-md animate-fade"
-          onClick={() => setFullscreenCurriculum(false)}
-        >
-          <div 
-            className="relative max-w-3xl w-full max-h-[92vh] bg-obsidian-950 rounded-2xl overflow-hidden border border-white/20 shadow-2xl flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-4 bg-obsidian-900 border-b border-white/10 flex items-center justify-between">
-              <div>
-                <h4 className="font-display font-bold text-sm sm:text-base text-white">
-                  Currículum Vitae & Portafolio Oficial
-                </h4>
-                <p className="text-xs text-amberGold">
-                  Rafael Francisco Ochoa Rodríguez ("Rafo8a")
-                </p>
-              </div>
-              <button
-                onClick={() => setFullscreenCurriculum(false)}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white"
-                aria-label="Cerrar visor"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-2 sm:p-4 bg-black flex-1 overflow-auto flex items-center justify-center min-h-[300px]">
-              <img
-                src="/assets/pdf_curriculum_page1.webp"
-                alt="Currículum Oficial Completo"
-                className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg"
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <ImageLightbox
+        isOpen={fullscreenCurriculum}
+        onClose={() => setFullscreenCurriculum(false)}
+        src="/assets/pdf_curriculum_page1.webp"
+        title="Currículum Vitae & Portafolio Oficial"
+        subtitle='Rafael Francisco Ochoa Rodríguez ("Rafo8a")'
+      />
     </section>
   );
 }

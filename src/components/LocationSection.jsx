@@ -14,23 +14,16 @@ import {
   Map as MapIcon,
   Layers
 } from 'lucide-react';
+import { companyContact, buildWhatsAppUrl } from '../data/ecosystem';
+import { useClipboard } from '../hooks/useClipboard';
 
 export default function LocationSection() {
-  const [copied, setCopied] = useState(false);
+  const { copied, copy } = useClipboard(2500);
   const [mapType, setMapType] = useState('m'); // 'm' for roadmap, 'k' for satellite
 
-  const fullAddress = "Jr. Humberto Luna 105, Urb. Magisterial 1era etapa, Wanchaq, Cusco 05184, Perú";
-  const mapsSearchUrl = "https://maps.app.goo.gl/kDN5wRVRCuxck4jq7";
-  const mapsDirectionsUrl = "https://www.google.com/maps/dir/?api=1&destination=aol-domo,+-13.524152,-71.9489099";
-  const whatsappVisitUrl = "https://wa.me/51944100990?text=" + encodeURIComponent(
+  const whatsappVisitUrl = buildWhatsAppUrl(
     "Hola Rafael, deseo coordinar una visita o reunión presencial en la sede central de AOL-DOMO en Jr. Humberto Luna 105, Cusco."
   );
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(fullAddress);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
 
   // Google Maps embed URL using the official Google Place ID for aol-domo (centered street zoom)
   const embedUrl = mapType === 'k'
@@ -47,14 +40,14 @@ export default function LocationSection() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-900/60 border border-forest-600/30 text-forest-200 text-xs font-semibold uppercase tracking-wider mb-3">
+          <div className="badge-forest mb-3">
             <Compass className="w-3.5 h-3.5 text-amberGold" />
             <span>Sede Central & Taller Creativo</span>
           </div>
-          <h2 className="font-display font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          <h2 className="section-title">
             Ubicación del Holding <span className="text-amberGold">AOL-DOMO</span>
           </h2>
-          <p className="mt-2.5 text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
+          <p className="section-desc mt-2.5">
             Nuestra sede ejecutiva y centro de desarrollo de hábitats, arte textil y consultoría técnica se encuentra en la emblemática Urbanización Magisterial, en el corazón del Cusco.
           </p>
         </div>
@@ -78,13 +71,13 @@ export default function LocationSection() {
                     Dirección Oficial de AOL
                   </span>
                   <h3 className="font-display font-bold text-xl sm:text-2xl text-white mt-0.5">
-                    Jr. Humberto Luna 105
+                    {companyContact.streetAddress}
                   </h3>
                   <p className="text-sm sm:text-base font-semibold text-slate-200">
-                    Urb. Magisterial 1era etapa
+                    {companyContact.urbanization}
                   </p>
                   <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
-                    Wanchaq, Cusco 05184 • Perú
+                    {companyContact.cityRegion}
                   </p>
                 </div>
               </div>
@@ -103,8 +96,8 @@ export default function LocationSection() {
               {/* Quick Actions Bar */}
               <div className="mt-5 pt-5 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
-                  onClick={handleCopy}
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-obsidian-900 hover:bg-obsidian-850 border border-white/10 text-slate-200 hover:text-white text-xs sm:text-sm font-semibold transition-all active:scale-98"
+                  onClick={() => copy(companyContact.fullAddress)}
+                  className="btn-dark"
                   title="Copiar dirección para GPS o Waze"
                 >
                   {copied ? (
@@ -121,10 +114,10 @@ export default function LocationSection() {
                 </button>
 
                 <a
-                  href={mapsDirectionsUrl}
+                  href={companyContact.mapsDirectionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-amberGold hover:bg-amberGold-light text-obsidian-950 text-xs sm:text-sm font-bold transition-all shadow-md shadow-amberGold/15 active:scale-98"
+                  className="btn-gold"
                 >
                   <Navigation className="w-4 h-4" />
                   <span>Cómo Llegar (GPS)</span>
@@ -133,7 +126,7 @@ export default function LocationSection() {
 
               <div className="mt-3">
                 <a
-                  href={mapsSearchUrl}
+                  href={companyContact.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs sm:text-sm font-medium border border-white/10 transition-colors"
@@ -270,7 +263,7 @@ export default function LocationSection() {
                 {/* Direct Google Maps External Button on top right */}
                 <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4">
                   <a
-                    href={mapsSearchUrl}
+                    href={companyContact.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-obsidian-950/95 hover:bg-obsidian-900 backdrop-blur-md border border-white/20 text-white text-xs font-semibold shadow-2xl transition-all"
@@ -283,7 +276,7 @@ export default function LocationSection() {
 
               {/* Footer caption */}
               <div className="pt-3 px-2 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
-                <span>📍 Ubicación exacta: Jr. Humberto Luna 105, Urb. Magisterial, Cusco (05184)</span>
+                <span>📍 Ubicación exacta: {companyContact.streetAddress}, {companyContact.urbanization}, Cusco</span>
                 <span className="text-slate-500">Centrado en la sede de AOL-DOMO</span>
               </div>
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, CheckCircle2, MessageCircle, ArrowUpRight } from 'lucide-react';
+import { buildWhatsAppUrl } from '../data/ecosystem';
 
 export default function CompanyModal({ company, onClose }) {
   useEffect(() => {
@@ -7,12 +8,17 @@ export default function CompanyModal({ company, onClose }) {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
   }, [onClose]);
 
   if (!company) return null;
 
-  const whatsappMessage = encodeURIComponent(
+  const whatsappUrl = buildWhatsAppUrl(
     `Hola Rafael, estoy interesado en conocer más detalles sobre los servicios y proyectos de ${company.name} del holding AOL-DOMO.`
   );
 
@@ -95,7 +101,7 @@ export default function CompanyModal({ company, onClose }) {
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
               <a
-                href={`https://wa.me/51944100990?text=${whatsappMessage}`}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amberGold hover:bg-amberGold-light text-obsidian-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 shadow-md active:scale-98"

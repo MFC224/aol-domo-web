@@ -43,6 +43,38 @@
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
 }
 
+@layer components {
+  /* Reusable standard UI buttons */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-amberGold hover:bg-amberGold-light text-obsidian-950 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-amberGold/15 active:scale-95;
+  }
+
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-obsidian-900 hover:bg-obsidian-850 border border-white/10 text-slate-200 hover:text-white text-xs sm:text-sm font-semibold transition-all duration-200 active:scale-95;
+  }
+
+  /* Reusable Section Headers & Badges */
+  .badge-forest {
+    @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-900/80 border border-forest-600/40 text-forest-200 text-xs font-semibold tracking-widest uppercase shadow-sm;
+  }
+
+  .badge-gold {
+    @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amberGold/15 border border-amberGold/30 text-amberGold text-xs font-semibold tracking-wider uppercase;
+  }
+
+  .section-eyebrow {
+    @apply text-xs font-bold uppercase tracking-widest text-amberGold block mb-2;
+  }
+
+  .section-title {
+    @apply font-display font-bold text-2xl sm:text-4xl text-white tracking-tight;
+  }
+
+  .section-desc {
+    @apply mt-3 text-sm sm:text-base text-slate-300 font-sans leading-relaxed;
+  }
+}
+
 /* Pause marquee animation on hover */
 .pause-marquee:hover .animate-marquee {
   animation-play-state: paused;

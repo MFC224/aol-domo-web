@@ -226,3 +226,35 @@ export const holdingData = {
     }
   ]
 };
+
+// Centralized contact & location constants
+export const companyContact = {
+  phoneDisplay: "+51 944 100 990",
+  phoneRaw: "51944100990",
+  emailAol: "aol-domo@gmail.com",
+  emailPersonal: "rafo8a@gmail.com",
+  fullAddress: "Jr. Humberto Luna 105, Urb. Magisterial 1era etapa, Wanchaq, Cusco 05184, Perú",
+  streetAddress: "Jr. Humberto Luna 105",
+  urbanization: "Urb. Magisterial 1era etapa",
+  cityRegion: "Wanchaq, Cusco 05184 • Perú",
+  mapsUrl: "https://maps.app.goo.gl/kDN5wRVRCuxck4jq7",
+  mapsDirectionsUrl: "https://www.google.com/maps/dir/?api=1&destination=aol-domo,+-13.524152,-71.9489099"
+};
+
+// Global helper to build consistent WhatsApp links without duplicating query logic
+export const buildWhatsAppUrl = (message = "") => {
+  const base = `https://wa.me/${companyContact.phoneRaw}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+};
+
+// Global navigation structure
+export const navLinks = [
+  { name: "Inicio", href: "#hero", desc: "Portada & Visión" },
+  { name: "Empresas", href: "#empresas", desc: "La Constelación de Marcas" },
+  { name: "Ecosistema", href: "#ecosistema", desc: "Estructura Corporativa" },
+  { name: "Patrimonio", href: "#patrimonio", desc: "Machu Picchu & Señalética" },
+  { name: "Fundador", href: "#fundador", desc: "Rafael Francisco Ochoa" },
+  { name: "Ubicación", href: "#ubicacion", desc: "Sede Central en Cusco" },
+  { name: "Contacto", href: "#contacto", desc: "Atención & Cotizaciones" },
+];
+

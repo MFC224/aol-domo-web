@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { navLinks, buildWhatsAppUrl } from '../data/ecosystem';
 
 export default function Navbar({ onSelectCompany }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,15 +14,7 @@ export default function Navbar({ onSelectCompany }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Inicio", href: "#hero", desc: "Portada & Visión" },
-    { name: "Empresas", href: "#empresas", desc: "La Constelación de Marcas" },
-    { name: "Ecosistema", href: "#ecosistema", desc: "Estructura Corporativa" },
-    { name: "Patrimonio", href: "#patrimonio", desc: "Machu Picchu & Señalética" },
-    { name: "Fundador", href: "#fundador", desc: "Rafael Francisco Ochoa" },
-    { name: "Ubicación", href: "#ubicacion", desc: "Sede Central en Cusco" },
-    { name: "Contacto", href: "#contacto", desc: "Atención & Cotizaciones" },
-  ];
+  const whatsappUrl = buildWhatsAppUrl("Hola Rafael, deseo información sobre el holding AOL-DOMO");
 
   return (
     <header 
@@ -70,7 +63,7 @@ export default function Navbar({ onSelectCompany }) {
           {/* Action Button - Single line pill with no wrap */}
           <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
             <a
-              href="https://wa.me/51944100990?text=Hola%20Rafael,%20deseo%20informaci%C3%B3n%20sobre%20el%20holding%20AOL-DOMO"
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-obsidian-950 bg-amberGold hover:bg-amberGold-light rounded-xl transition-all duration-200 shadow-md shadow-amberGold/15 whitespace-nowrap active:scale-95 flex-shrink-0"
@@ -113,7 +106,7 @@ export default function Navbar({ onSelectCompany }) {
 
             <div className="pt-4">
               <a
-                href="https://wa.me/51944100990?text=Hola%20Rafael,%20deseo%20informaci%C3%B3n%20sobre%20el%20holding%20AOL-DOMO"
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}

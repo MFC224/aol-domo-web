@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { MessageCircle, Mail, MapPin, Phone, Send, ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import { holdingData } from '../data/ecosystem';
+import { Mail, MapPin, Phone, Send, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { companyContact, buildWhatsAppUrl } from '../data/ecosystem';
 
 export default function ContactSection() {
   const [selectedDivision, setSelectedDivision] = useState("AOL-DOMO (Hábitats Geodésicos)");
@@ -23,12 +23,12 @@ export default function ContactSection() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const text = encodeURIComponent(
-      `Hola Rafael Ochoa,\n\nMi nombre es: ${formData.nombre}\nDivisión de interés: ${selectedDivision}\nTeléfono: ${formData.telefono}\nEmail: ${formData.email}\n\nMensaje:\n${formData.mensaje}`
-    );
-    window.open(`https://wa.me/51944100990?text=${text}`, '_blank');
+    const message = `Hola Rafael Ochoa,\n\nMi nombre es: ${formData.nombre}\nDivisión de interés: ${selectedDivision}\nTeléfono: ${formData.telefono}\nEmail: ${formData.email}\n\nMensaje:\n${formData.mensaje}`;
+    window.open(buildWhatsAppUrl(message), '_blank');
     setSubmitted(true);
   };
+
+  const directWhatsAppUrl = buildWhatsAppUrl("Hola Rafael, deseo contactarme con AOL-DOMO");
 
   return (
     <section id="contacto" className="py-16 sm:py-24 bg-obsidian-900 relative overflow-hidden">
@@ -39,20 +39,20 @@ export default function ContactSection() {
           {/* Left Column: Direct Contact Details */}
           <div className="lg:col-span-5 space-y-5 sm:space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-amberGold block mb-2">
+              <span className="section-eyebrow">
                 Atención Directa
               </span>
-              <h2 className="font-display font-bold text-2xl sm:text-4xl text-white tracking-tight">
+              <h2 className="section-title">
                 Inicie su Proyecto con AOL-DOMO
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
+              <p className="section-desc">
                 Coordinación directa con la dirección ejecutiva de Rafael Francisco Ochoa Rodríguez para adquisiciones, desarrollo de hábitats, colecciones textiles y consultoría técnica.
               </p>
             </div>
 
             <div className="space-y-3.5 pt-2">
               <a
-                href="https://wa.me/51944100990?text=Hola%20Rafael,%20deseo%20contactarme%20con%20AOL-DOMO"
+                href={directWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-obsidian-950 border border-white/10 hover:border-amberGold/40 transition-colors group active:scale-98"
@@ -65,13 +65,13 @@ export default function ContactSection() {
                     Teléfono & WhatsApp
                   </span>
                   <span className="text-base sm:text-lg font-bold text-white tracking-wide">
-                    +51 944 100 990
+                    {companyContact.phoneDisplay}
                   </span>
                 </div>
               </a>
 
               <a
-                href="mailto:aol-domo@gmail.com"
+                href={`mailto:${companyContact.emailAol}`}
                 className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-obsidian-950 border border-white/10 hover:border-amberGold/40 transition-colors group active:scale-98"
               >
                 <div className="p-3.5 rounded-xl bg-forest-900/60 text-forest-300 group-hover:bg-amberGold group-hover:text-obsidian-950 transition-colors flex-shrink-0">
@@ -82,10 +82,10 @@ export default function ContactSection() {
                     Correos Electrónicos
                   </span>
                   <span className="text-sm sm:text-base font-semibold text-white block">
-                    aol-domo@gmail.com
+                    {companyContact.emailAol}
                   </span>
                   <span className="text-xs sm:text-sm text-slate-400 block">
-                    rafo8a@gmail.com
+                    {companyContact.emailPersonal}
                   </span>
                 </div>
               </a>
@@ -107,10 +107,10 @@ export default function ContactSection() {
                     </span>
                   </div>
                   <span className="text-sm sm:text-base font-bold text-white block mt-0.5">
-                    Jr. Humberto Luna 105, Urb. Magisterial
+                    {companyContact.streetAddress}, Urb. Magisterial
                   </span>
                   <span className="text-xs sm:text-sm text-slate-300 block">
-                    Wanchaq, Cusco 05184 • Perú
+                    {companyContact.cityRegion}
                   </span>
                 </div>
               </a>

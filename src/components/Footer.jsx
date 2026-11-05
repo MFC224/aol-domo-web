@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowUp, Heart } from 'lucide-react';
-import { holdingData } from '../data/ecosystem';
+import { ArrowUp } from 'lucide-react';
+import { holdingData, companyContact } from '../data/ecosystem';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -39,83 +39,42 @@ export default function Footer() {
 
             <div className="text-xs sm:text-sm text-slate-300 pt-2">
               <p className="font-bold text-white">Dirección Ejecutiva:</p>
-              <p className="mt-0.5">Rafael Francisco Ochoa Rodríguez ("Rafo8a")</p>
+              <p className="mt-0.5">{holdingData.founder.name} ("{holdingData.founder.pseudonym}")</p>
               <a href="#ubicacion" className="hover:text-amberGold transition-colors inline-block mt-1 text-slate-300 hover:underline">
-                📍 Jr. Humberto Luna 105, Urb. Magisterial 1era etapa • Cusco 05184, Perú
+                📍 {companyContact.fullAddress}
               </a>
             </div>
           </div>
 
-          {/* Division Links */}
+          {/* Division Links - Dynamically mapped from source of truth */}
           <div className="lg:col-span-4 space-y-3.5">
             <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-200">
               Divisiones del Holding
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
-              <li>
-                <a href="#empresas" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • AOL-DOMO (Hábitats Geodésicos & Bioarquitectura)
-                </a>
-              </li>
-              <li>
-                <a href="#empresas" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • JyR CONSULT BB SS (Consultoría & Licitaciones)
-                </a>
-              </li>
-              <li>
-                <a href="#empresas" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • HANDELCON (Inmobiliaria & Constructora)
-                </a>
-              </li>
-              <li>
-                <a href="#empresas" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • TERRA (Casas de Campo & Sostenibilidad)
-                </a>
-              </li>
-              <li>
-                <a href="#empresas" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • ATAKAU / ALIEN PROJECT (Streetwear & Arte Ancestral)
-                </a>
-              </li>
-              <li>
-                <a href="#empresas" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • PUKANAWI / KONTIKI (Herencia Textil 1986)
-                </a>
-              </li>
+              {holdingData.companies.map((comp) => (
+                <li key={comp.id}>
+                  <a href="#empresas" className="hover:text-amberGold transition-colors inline-block py-0.5">
+                    • {comp.name} ({comp.badge})
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Institutional Milestones Links */}
+          {/* Institutional Milestones Links - Dynamically mapped */}
           <div className="lg:col-span-3 space-y-3.5">
             <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-200">
               Hitos de Señalética
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
-              <li>
-                <a href="#patrimonio" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • Santuario de Machu Picchu
-                </a>
-              </li>
-              <li>
-                <a href="#patrimonio" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • Camino Inka & Wayna Picchu
-                </a>
-              </li>
-              <li>
-                <a href="#patrimonio" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • Parque Nacional del Manu
-                </a>
-              </li>
-              <li>
-                <a href="#patrimonio" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • Estación Biológica Wayqecha
-                </a>
-              </li>
-              <li>
-                <a href="#patrimonio" className="hover:text-amberGold transition-colors inline-block py-0.5">
-                  • Universidad Andina del Cusco
-                </a>
-              </li>
+              {holdingData.patrimonialMilestones.map((item) => (
+                <li key={item.id}>
+                  <a href="#patrimonio" className="hover:text-amberGold transition-colors inline-block py-0.5">
+                    • {item.title}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

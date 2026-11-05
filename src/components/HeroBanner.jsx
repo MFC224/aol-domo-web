@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ArrowDown } from 'lucide-react';
 import { holdingData } from '../data/ecosystem';
+import { useSwipe } from '../hooks/useSwipe';
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -8,10 +9,6 @@ export default function HeroBanner() {
   const banners = holdingData.banners;
 
   const SLIDE_DURATION = 7000; // 7 segundos continuos
-
-  // Touch swipe handling for mobile
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
 
   // Auto-advance carousel every 7 seconds
   useEffect(() => {
@@ -30,25 +27,10 @@ export default function HeroBanner() {
     setCurrentSlide((prev) => (prev + 1) % banners.length);
   };
 
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const diff = touchStartX.current - touchEndX.current;
-    if (diff > 45) {
-      nextSlide();
-    } else if (diff < -45) {
-      prevSlide();
-    }
-    touchStartX.current = 0;
-    touchEndX.current = 0;
-  };
+  const swipeHandlers = useSwipe({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: prevSlide
+  });
 
   const currentBanner = banners[currentSlide];
 
@@ -88,9 +70,7 @@ export default function HeroBanner() {
         {/* Panoramic Banner Carousel Frame with Clean Centered Composition */}
         <div 
           className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/80 bg-obsidian-900 group select-none"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          {...swipeHandlers}
         >
           
           {/* Main Panorama Stage: Centered 1600x581 canvas with 0% cropping & Ultra-Smooth Crossfade */}

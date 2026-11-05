@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ArrowUpRight, Building2, Palette, Compass, Layers } from 'lucide-react';
 import { holdingData } from '../data/ecosystem';
+
+const CATEGORIES = [
+  { name: "Todas", icon: Layers },
+  { name: "Arquitectura & Ecoturismo", icon: Compass },
+  { name: "Moda, Arte & Textil", icon: Palette },
+  { name: "Construcción & Obras", icon: Building2 },
+  { name: "Ingeniería & Consultoría", icon: Building2 },
+];
 
 export default function EcosystemGrid({ onSelectCompany }) {
   const [activeCategory, setActiveCategory] = useState("Todas");
   const companies = holdingData.companies;
 
-  const categories = [
-    { name: "Todas", icon: Layers },
-    { name: "Arquitectura & Ecoturismo", icon: Compass },
-    { name: "Moda, Arte & Textil", icon: Palette },
-    { name: "Construcción & Obras", icon: Building2 },
-    { name: "Ingeniería & Consultoría", icon: Building2 },
-  ];
-
-  const filteredCompanies = activeCategory === "Todas"
-    ? companies
-    : companies.filter((c) => c.category === activeCategory);
+  const filteredCompanies = useMemo(() => {
+    return activeCategory === "Todas"
+      ? companies
+      : companies.filter((c) => c.category === activeCategory);
+  }, [activeCategory, companies]);
 
   return (
     <section id="ecosistema" className="py-16 sm:py-24 bg-obsidian-950 relative overflow-hidden">
@@ -25,20 +27,20 @@ export default function EcosystemGrid({ onSelectCompany }) {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6 pb-6 border-b border-white/10">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-amberGold block mb-2">
+            <span className="section-eyebrow">
               Ecosistema Integral
             </span>
-            <h2 className="font-display font-bold text-2xl sm:text-4xl text-white tracking-tight">
+            <h2 className="section-title">
               Estructura Corporativa & Divisiones
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-300 font-sans max-w-xl">
+            <p className="section-desc mt-2 max-w-xl">
               De la manufactura textil tradicional al desarrollo de hábitats bioclimáticos y obras de ingeniería civil.
             </p>
           </div>
 
           {/* Category Filter Pills - Horizontal touch-friendly scroll on mobile */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
-            {categories.map((cat) => {
+            {CATEGORIES.map((cat) => {
               const Icon = cat.icon;
               const isActive = activeCategory === cat.name;
               return (
