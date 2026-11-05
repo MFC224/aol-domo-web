@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, ArrowDown, Eye, Maximize2, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowDown, Maximize2, X, Clock } from 'lucide-react';
 import { holdingData } from '../data/ecosystem';
 
 export default function HeroBanner() {
@@ -8,16 +8,18 @@ export default function HeroBanner() {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const banners = holdingData.banners;
 
+  const SLIDE_DURATION = 7000; // Exactamente 7 segundos
+
   // Touch swipe handling for mobile
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // Auto-advance carousel every 6 seconds unless paused
+  // Auto-advance carousel every 7 seconds
   useEffect(() => {
     if (isPaused || fullscreenImage) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % banners.length);
-    }, 6000);
+    }, SLIDE_DURATION);
     return () => clearInterval(interval);
   }, [isPaused, fullscreenImage, banners.length]);
 
@@ -41,15 +43,15 @@ export default function HeroBanner() {
     if (!touchStartX.current || !touchEndX.current) return;
     const diff = touchStartX.current - touchEndX.current;
     if (diff > 45) {
-      // Swiped left
       nextSlide();
     } else if (diff < -45) {
-      // Swiped right
       prevSlide();
     }
     touchStartX.current = 0;
     touchEndX.current = 0;
   };
+
+  const currentBanner = banners[currentSlide];
 
   return (
     <section 
@@ -63,7 +65,7 @@ export default function HeroBanner() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
         
-        {/* Title Header - Scaled for high mobile readability */}
+        {/* Title Header */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-900/80 border border-forest-600/40 text-forest-200 text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-amberGold animate-pulse" />
@@ -84,7 +86,7 @@ export default function HeroBanner() {
           </p>
         </div>
 
-        {/* Panoramic Banner Carousel Frame */}
+        {/* Panoramic Banner Carousel Frame with Clean Centered Composition */}
         <div 
           className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/80 bg-obsidian-900 group select-none"
           onTouchStart={handleTouchStart}
@@ -92,100 +94,110 @@ export default function HeroBanner() {
           onTouchEnd={handleTouchEnd}
         >
           
-          {/* Main Panorama Stage with generous mobile height so images are visible */}
-          <div className="relative w-full h-[280px] xs:h-[320px] sm:h-[400px] md:h-[460px] lg:h-[520px] bg-black">
+          {/* Main Panorama Stage: Centered 1600x581 canvas with 0% cropping */}
+          <div className="relative w-full aspect-[16/7] sm:aspect-[16/6] md:aspect-[1600/581] bg-black flex items-center justify-center overflow-hidden">
             {banners.map((banner, index) => (
               <div
                 key={banner.id}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-in-out ${
                   index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                 }`}
               >
                 <img
                   src={banner.image}
                   alt={banner.title}
-                  className="w-full h-full object-cover sm:object-contain md:object-cover object-center"
+                  className="w-full h-full object-contain object-center"
                   loading={index === 0 ? "eager" : "lazy"}
                 />
-
-                {/* Gradients on edges for text legibility without blocking the image */}
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/40 to-transparent sm:opacity-90 opacity-95" />
-                <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-obsidian-950/50 via-transparent to-obsidian-950/50" />
-
-                {/* Banner Caption Overlay */}
-                <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-8 right-3 sm:right-8 z-20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3">
-                  <div className="max-w-xl bg-obsidian-950/85 backdrop-blur-md px-4 py-3 sm:px-5 sm:py-4 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl">
-                    <span className="text-xs font-bold uppercase tracking-wider text-amberGold block mb-1">
-                      {banner.category}
-                    </span>
-                    <h3 className="font-display font-bold text-base sm:text-xl lg:text-2xl text-white tracking-wide">
-                      {banner.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-300 mt-1 line-clamp-2 font-sans">
-                      {banner.caption}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2 self-end sm:self-auto">
-                    {/* Expand full image button */}
-                    <button
-                      onClick={() => setFullscreenImage(banner)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-obsidian-950/80 hover:bg-obsidian-900 border border-white/10 text-xs font-medium text-slate-200 hover:text-white backdrop-blur-sm transition-colors"
-                      title="Ver imagen en tamaño completo"
-                    >
-                      <Maximize2 className="w-3.5 h-3.5 text-amberGold" />
-                      <span className="hidden sm:inline">Ampliar</span>
-                    </button>
-
-                    <span className="text-xs text-slate-300 font-mono bg-obsidian-950/80 px-3 py-1.5 rounded-lg border border-white/10">
-                      {String(index + 1).padStart(2, '0')} / {String(banners.length).padStart(2, '0')}
-                    </span>
-                  </div>
-                </div>
               </div>
             ))}
+
+            {/* Carousel Navigation Buttons - Positioned vertically centered */}
+            <button
+              onClick={prevSlide}
+              aria-label="Anterior banner"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-2.5 rounded-full bg-obsidian-950/75 hover:bg-obsidian-900 border border-white/15 text-white/90 hover:text-white transition-all shadow-xl backdrop-blur-md active:scale-95"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+            
+            <button
+              onClick={nextSlide}
+              aria-label="Siguiente banner"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-2.5 rounded-full bg-obsidian-950/75 hover:bg-obsidian-900 border border-white/15 text-white/90 hover:text-white transition-all shadow-xl backdrop-blur-md active:scale-95"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+
+            {/* Quick mobile zoom button on top right of the image */}
+            <button
+              onClick={() => setFullscreenImage(currentBanner)}
+              className="absolute top-3 right-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-obsidian-950/75 hover:bg-obsidian-900 border border-white/15 text-xs font-medium text-slate-200 hover:text-white backdrop-blur-sm transition-colors shadow-lg"
+              title="Ver imagen en tamaño completo"
+            >
+              <Maximize2 className="w-3.5 h-3.5 text-amberGold" />
+              <span className="hidden sm:inline">Ampliar</span>
+            </button>
           </div>
 
-          {/* Carousel Navigation Buttons - Big touch target */}
-          <button
-            onClick={prevSlide}
-            aria-label="Anterior banner"
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-obsidian-950/80 hover:bg-obsidian-900 border border-white/15 text-white transition-all shadow-xl backdrop-blur-md active:scale-95"
-          >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            aria-label="Siguiente banner"
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-obsidian-950/80 hover:bg-obsidian-900 border border-white/15 text-white transition-all shadow-xl backdrop-blur-md active:scale-95"
-          >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-
-          {/* Slide Indicator Dots */}
-          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center gap-1.5 bg-obsidian-950/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-            {banners.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                aria-label={`Ir al slide ${idx + 1}`}
-                className={`transition-all duration-300 rounded-full ${
-                  idx === currentSlide 
-                    ? 'w-6 h-2 bg-amberGold' 
-                    : 'w-2 h-2 bg-white/40 hover:bg-white/70'
-                }`}
-              />
-            ))}
+          {/* 7-Second Animated Progress Bar */}
+          <div className="w-full h-1 bg-white/10 relative overflow-hidden">
+            <div
+              key={currentSlide}
+              className="h-full bg-amberGold"
+              style={{
+                animation: !isPaused && !fullscreenImage ? `progress-fill ${SLIDE_DURATION}ms linear forwards` : 'none'
+              }}
+            />
           </div>
 
-          {/* Mobile Swipe Hint */}
-          <div className="sm:hidden absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full bg-obsidian-950/80 backdrop-blur-md border border-white/10 text-[10px] text-slate-300 font-medium">
-            Desliza ↔ para navegar
+          {/* Docked Info Bar: Keeps the banner 100% visible with zero text overlap */}
+          <div className="p-4 sm:p-5 bg-obsidian-950/95 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-bold uppercase tracking-wider text-amberGold">
+                  {currentBanner.category}
+                </span>
+                <span className="text-slate-600">•</span>
+                <span className="text-[11px] text-slate-400 font-mono flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-amberGold/80" />
+                  Paso cada 7s
+                </span>
+              </div>
+              <h3 className="font-display font-bold text-lg sm:text-xl text-white tracking-wide">
+                {currentBanner.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 font-sans mt-0.5 leading-relaxed">
+                {currentBanner.caption}
+              </p>
+            </div>
+
+            {/* Carousel Dots & Controls */}
+            <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
+              <div className="flex items-center gap-1.5 bg-obsidian-900 px-3 py-1.5 rounded-full border border-white/10">
+                {banners.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    aria-label={`Ir al banner ${idx + 1}`}
+                    className={`transition-all duration-300 rounded-full ${
+                      idx === currentSlide 
+                        ? 'w-6 h-2 bg-amberGold' 
+                        : 'w-2 h-2 bg-white/30 hover:bg-white/60'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <span className="text-xs text-slate-300 font-mono bg-obsidian-900 px-3 py-1.5 rounded-lg border border-white/10">
+                {String(currentSlide + 1).padStart(2, '0')} / {String(banners.length).padStart(2, '0')}
+              </span>
+            </div>
           </div>
+
         </div>
 
-        {/* Bottom CTA & Scroll Anchor - Responsive Grid on Mobile */}
+        {/* Bottom CTA & Scroll Anchor */}
         <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
           <a
             href="#empresas"
@@ -211,11 +223,14 @@ export default function HeroBanner() {
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-md"
           onClick={() => setFullscreenImage(null)}
         >
-          <div className="relative max-w-5xl w-full bg-obsidian-950 rounded-2xl overflow-hidden border border-white/15 shadow-2xl">
+          <div 
+            className="relative max-w-6xl w-full bg-obsidian-950 rounded-2xl overflow-hidden border border-white/15 shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="p-4 flex items-center justify-between border-b border-white/10 bg-obsidian-900">
               <div>
                 <span className="text-xs font-bold text-amberGold uppercase">{fullscreenImage.category}</span>
-                <h4 className="text-white font-bold text-base">{fullscreenImage.title}</h4>
+                <h4 className="text-white font-bold text-base sm:text-lg">{fullscreenImage.title}</h4>
               </div>
               <button
                 onClick={() => setFullscreenImage(null)}

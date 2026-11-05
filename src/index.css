@@ -57,6 +57,16 @@
   scrollbar-width: none;
 }
 
+/* Progress bar animation for 7s carousel */
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 /* Touch targets and mobile typography clarity */
 @media (max-width: 640px) {
   html {
