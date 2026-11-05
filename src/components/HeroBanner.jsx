@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, ArrowDown, Maximize2, X, Clock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowDown } from 'lucide-react';
 import { holdingData } from '../data/ecosystem';
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [fullscreenImage, setFullscreenImage] = useState(null);
   const banners = holdingData.banners;
 
-  const SLIDE_DURATION = 7000; // Exactamente 7 segundos
+  const SLIDE_DURATION = 7000; // 7 segundos continuos
 
   // Touch swipe handling for mobile
   const touchStartX = useRef(0);
@@ -16,12 +15,12 @@ export default function HeroBanner() {
 
   // Auto-advance carousel every 7 seconds
   useEffect(() => {
-    if (isPaused || fullscreenImage) return;
+    if (isPaused) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % banners.length);
     }, SLIDE_DURATION);
     return () => clearInterval(interval);
-  }, [isPaused, fullscreenImage, banners.length]);
+  }, [isPaused, banners.length]);
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + banners.length) % banners.length);
@@ -94,12 +93,12 @@ export default function HeroBanner() {
           onTouchEnd={handleTouchEnd}
         >
           
-          {/* Main Panorama Stage: Centered 1600x581 canvas with 0% cropping */}
+          {/* Main Panorama Stage: Centered 1600x581 canvas with 0% cropping & Ultra-Smooth Crossfade */}
           <div className="relative w-full aspect-[16/7] sm:aspect-[16/6] md:aspect-[1600/581] bg-black flex items-center justify-center overflow-hidden">
             {banners.map((banner, index) => (
               <div
                 key={banner.id}
-                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ease-in-out ${
                   index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                 }`}
               >
@@ -128,16 +127,6 @@ export default function HeroBanner() {
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
-
-            {/* Quick mobile zoom button on top right of the image */}
-            <button
-              onClick={() => setFullscreenImage(currentBanner)}
-              className="absolute top-3 right-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-obsidian-950/75 hover:bg-obsidian-900 border border-white/15 text-xs font-medium text-slate-200 hover:text-white backdrop-blur-sm transition-colors shadow-lg"
-              title="Ver imagen en tamaño completo"
-            >
-              <Maximize2 className="w-3.5 h-3.5 text-amberGold" />
-              <span className="hidden sm:inline">Ampliar</span>
-            </button>
           </div>
 
           {/* 7-Second Animated Progress Bar */}
@@ -146,24 +135,17 @@ export default function HeroBanner() {
               key={currentSlide}
               className="h-full bg-amberGold"
               style={{
-                animation: !isPaused && !fullscreenImage ? `progress-fill ${SLIDE_DURATION}ms linear forwards` : 'none'
+                animation: !isPaused ? `progress-fill ${SLIDE_DURATION}ms linear forwards` : 'none'
               }}
             />
           </div>
 
-          {/* Docked Info Bar: Keeps the banner 100% visible with zero text overlap */}
+          {/* Docked Info Bar: Clean, Minimalist, No 'Paso 7s' label and No 'Ampliar' button */}
           <div className="p-4 sm:p-5 bg-obsidian-950/95 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="max-w-2xl">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-amberGold">
-                  {currentBanner.category}
-                </span>
-                <span className="text-slate-600">•</span>
-                <span className="text-[11px] text-slate-400 font-mono flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-amberGold/80" />
-                  Paso cada 7s
-                </span>
-              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-amberGold block mb-1">
+                {currentBanner.category}
+              </span>
               <h3 className="font-display font-bold text-lg sm:text-xl text-white tracking-wide">
                 {currentBanner.title}
               </h3>
@@ -172,7 +154,7 @@ export default function HeroBanner() {
               </p>
             </div>
 
-            {/* Carousel Dots & Controls */}
+            {/* Carousel Dots & Counter */}
             <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
               <div className="flex items-center gap-1.5 bg-obsidian-900 px-3 py-1.5 rounded-full border border-white/10">
                 {banners.map((_, idx) => (
@@ -216,43 +198,6 @@ export default function HeroBanner() {
         </div>
 
       </div>
-
-      {/* Lightbox / Fullscreen Image Viewer */}
-      {fullscreenImage && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-md"
-          onClick={() => setFullscreenImage(null)}
-        >
-          <div 
-            className="relative max-w-6xl w-full bg-obsidian-950 rounded-2xl overflow-hidden border border-white/15 shadow-2xl flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-4 flex items-center justify-between border-b border-white/10 bg-obsidian-900">
-              <div>
-                <span className="text-xs font-bold text-amberGold uppercase">{fullscreenImage.category}</span>
-                <h4 className="text-white font-bold text-base sm:text-lg">{fullscreenImage.title}</h4>
-              </div>
-              <button
-                onClick={() => setFullscreenImage(null)}
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white"
-                aria-label="Cerrar visor"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="p-2 sm:p-4 bg-black flex items-center justify-center max-h-[75vh] overflow-auto">
-              <img
-                src={fullscreenImage.image}
-                alt={fullscreenImage.title}
-                className="max-h-[70vh] w-auto max-w-full object-contain"
-              />
-            </div>
-            <div className="p-4 bg-obsidian-900 border-t border-white/10 text-xs sm:text-sm text-slate-300">
-              {fullscreenImage.caption}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
