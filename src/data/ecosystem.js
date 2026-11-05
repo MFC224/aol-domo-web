@@ -21,7 +21,7 @@ export const holdingData = {
       id: "aol-domo",
       name: "AOL-DOMO",
       subtitle: "Holding Matriz & Bioarquitectura",
-      iconImg: "/assets/circle_aol.png",
+      iconImg: "/assets/circle_aol.webp",
       tagline: "Hábitats geodésicos y arquitectura del futuro",
       badge: "Empresa Matriz",
       category: "Arquitectura & Ecoturismo",
@@ -41,7 +41,7 @@ export const holdingData = {
       id: "jyr",
       name: "JyR CONSULT BB SS",
       subtitle: "Consultoría, Licitaciones & Proyectos",
-      iconImg: "/assets/circle_jyr.png",
+      iconImg: "/assets/circle_jyr.webp",
       tagline: "Ingeniería técnica y gestión integral",
       badge: "Ingeniería & Consultoría",
       category: "Ingeniería & Consultoría",
@@ -61,7 +61,7 @@ export const holdingData = {
       id: "handelcon",
       name: "HANDELCON",
       subtitle: "Inmobiliaria • Proyectos • Constructora",
-      iconImg: "/assets/circle_handelcon.png",
+      iconImg: "/assets/circle_handelcon.webp",
       tagline: "14 años ofreciendo calidad de vida",
       badge: "Constructora & Inmobiliaria",
       category: "Construcción & Obras",
@@ -81,7 +81,7 @@ export const holdingData = {
       id: "terra",
       name: "TERRA",
       subtitle: "Hábitat Sostenible & Casas de Campo",
-      iconImg: "/assets/circle_terra.png",
+      iconImg: "/assets/circle_terra.webp",
       tagline: "Conexión natural y sustentabilidad viva",
       badge: "Eco-Hábitat",
       category: "Arquitectura & Ecoturismo",
@@ -101,7 +101,7 @@ export const holdingData = {
       id: "atakau",
       name: "ATAKAU / ALIEN PROJECT",
       subtitle: "Arte Ancestral Andino & Mística Cósmica",
-      iconImg: "/assets/circle_alien_project.png",
+      iconImg: "/assets/circle_alien_project.webp",
       tagline: "Creer es crear • Resistencia cultural y vanguardia",
       badge: "Moda & Arte Textil",
       category: "Moda, Arte & Textil",
@@ -121,7 +121,7 @@ export const holdingData = {
       id: "pukanawi",
       name: "PUKANAWI / KONTIKI",
       subtitle: "Legado Textil & Identidad Cultural (1986)",
-      iconImg: "/assets/circle_pukanawi.png",
+      iconImg: "/assets/circle_pukanawi.webp",
       tagline: "Raíces auténticas de manufactura cusqueña",
       badge: "Herencia Histórica",
       category: "Moda, Arte & Textil",
@@ -139,54 +139,54 @@ export const holdingData = {
     }
   ],
 
-  // Banners for the main hero carousel
+  // Banners for the main hero carousel in High-Quality WebP
   banners: [
     {
       id: 1,
-      image: "/assets/1a.jpg",
+      image: "/assets/1a.webp",
       title: "ATAKAU: Creer es Crear",
       category: "Identidad & Vanguardia",
       caption: "Fusión de arte ancestral sudamericano con las raíces familiares de Kontiki (1986)."
     },
     {
       id: 2,
-      image: "/assets/2a.jpg",
+      image: "/assets/2a.webp",
       title: "Tecnología Textil Industrial",
       category: "Vanguardia Digital",
       caption: "Impresión Direct-To-Garment de precisión micrométrica con Kornit Avalanche Poly Pro."
     },
     {
       id: 3,
-      image: "/assets/3a.jpg",
+      image: "/assets/3a.webp",
       title: "Mística Andina & Aventura",
       category: "Cultura & Deporte",
       caption: "El espíritu del Tawantinsuyu, deportes extremos y misticismo en el corazón de los Andes."
     },
     {
       id: 4,
-      image: "/assets/4a.jpg",
+      image: "/assets/4a.webp",
       title: "Producción Industrial DG4 DTG",
       category: "Capacidad de Producción",
       caption: "Ingeniería de grado industrial para confección textil a gran escala con calidad internacional."
     },
     {
       id: 5,
-      image: "/assets/5a.jpg",
+      image: "/assets/5a.webp",
       title: "El Universo Corporativo AOL-DOMO",
       category: "Holding Empresarial",
       caption: "AOL-DOMO, JyR Consult, Handelcon, Terra, Atakau y Pukanawi unidos en una sola visión."
     }
   ],
 
-  // Historical milestones & institutional signage (Machu Picchu, Manu, etc.)
+  // Historical milestones & institutional signage in WebP (Machu Picchu, Manu, etc.)
   patrimonialMilestones: [
     {
       id: "machupicchu-camino-inka",
       title: "Santuario Histórico de Machu Picchu & Camino Inka",
       organization: "PROFONANPE Perú - Finlandia / Instituto Nacional de Cultura",
       role: "Diseño, fabricación e instalación de señalética patrimonial monumental",
-      image: "/assets/pdf_machupicchu_sign.png",
-      secondaryImage: "/assets/pdf_machupicchu_entrance.png",
+      image: "/assets/pdf_machupicchu_sign.webp",
+      secondaryImage: "/assets/pdf_machupicchu_entrance.webp",
       tag: "Patrimonio Mundial UNESCO",
       year: "2002 - 2004",
       description: "Ejecución de la señalética integral del Camino Inka, Wayna Picchu, Intipunku y Museo de Sitio con madera noble y placas de vinil multicapa resistente a la intemperie de alta montaña."
@@ -196,8 +196,8 @@ export const holdingData = {
       title: "Parque Nacional del Manu",
       organization: "Servicio Nacional de Áreas Naturales Protegidas",
       role: "Señalética cartográfica y directores turísticos",
-      image: "/assets/pdf_parque_manu.png",
-      secondaryImage: "/assets/pdf_flora_fauna_wayqecha.png",
+      image: "/assets/pdf_parque_manu.webp",
+      secondaryImage: "/assets/pdf_flora_fauna_wayqecha.webp",
       tag: "Reserva de Biósfera",
       year: "2006 - 2009",
       description: "Diseño de mapas de orientación, señalética de conservación ambiental y paneles interpretativos de flora y fauna para la Estación Biológica Wayqecha (2,950 msnm)."
@@ -207,8 +207,8 @@ export const holdingData = {
       title: "Universidad Andina del Cusco",
       organization: "UAC Sede Central",
       role: "Señalética corporativa y directorios institucionales",
-      image: "/assets/pdf_universidad_andina.png",
-      secondaryImage: "/assets/pdf_sayaqmarka_totems.png",
+      image: "/assets/pdf_universidad_andina.webp",
+      secondaryImage: "/assets/pdf_sayaqmarka_totems.webp",
       tag: "Infraestructura Educativa",
       year: "2004 - 2009",
       description: "Sistema integral de directorios por niveles, tótems de señalización y señalética de facultades para los pabellones de la Universidad Andina."
@@ -218,8 +218,8 @@ export const holdingData = {
       title: "Condominio Residencial Versalles",
       organization: "HANDELCON Constructora S.R.L.",
       role: "Anteproyecto, construcción y comercialización",
-      image: "/assets/pdf_condominio_versalles.png",
-      secondaryImage: "/assets/pdf_curriculum_page1.png",
+      image: "/assets/pdf_condominio_versalles.webp",
+      secondaryImage: "/assets/pdf_curriculum_page1.webp",
       tag: "Desarrollo Inmobiliario",
       year: "2010 - 2014",
       description: "Edificación residencial de departamentos con vista panorámica, áreas comunes de primer nivel y acabados de calidad garantizada en Cusco."

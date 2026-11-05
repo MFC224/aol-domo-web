@@ -18,7 +18,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 rounded-full p-0.5 bg-gradient-to-br from-amberGold/60 to-forest-600/40 flex-shrink-0">
                 <img
-                  src="/assets/circle_aol.png"
+                  src="/assets/circle_aol.webp"
                   alt="AOL-DOMO Logo"
                   className="w-full h-full object-cover rounded-full"
                 />

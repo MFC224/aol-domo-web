@@ -59,7 +59,7 @@ export default function FounderStory() {
                 className="relative w-full max-w-[260px] sm:max-w-[300px] aspect-[3/4] rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-br from-amberGold/50 via-forest-600/30 to-white/10 shadow-2xl overflow-hidden mb-4 cursor-pointer group"
               >
                 <img
-                  src="/assets/pdf_curriculum_page1.png"
+                  src="/assets/pdf_curriculum_page1.webp"
                   alt="Rafael Francisco Ochoa Rodríguez"
                   className="w-full h-full object-cover object-top rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-102"
                 />
@@ -205,7 +205,7 @@ export default function FounderStory() {
 
             <div className="p-2 sm:p-4 bg-black flex-1 overflow-auto flex items-center justify-center min-h-[300px]">
               <img
-                src="/assets/pdf_curriculum_page1.png"
+                src="/assets/pdf_curriculum_page1.webp"
                 alt="Currículum Oficial Completo"
                 className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg"
               />

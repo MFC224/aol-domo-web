@@ -38,7 +38,7 @@ export default function Navbar({ onSelectCompany }) {
           <a href="#hero" className="flex items-center gap-3 group flex-shrink-0">
             <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-gradient-to-br from-amberGold/60 via-forest-600/40 to-white/10 group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
               <img 
-                src="/assets/circle_aol.png" 
+                src="/assets/circle_aol.webp" 
                 alt="AOL-DOMO Logo" 
                 className="w-full h-full object-cover rounded-full"
               />
