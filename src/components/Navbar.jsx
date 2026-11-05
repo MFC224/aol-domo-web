@@ -44,15 +44,10 @@ export default function Navbar({ onSelectCompany }) {
               />
             </div>
             <div className="flex flex-col whitespace-nowrap">
-              <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-base sm:text-lg tracking-wider text-white">
-                  AOL-DOMO
-                </span>
-                <span className="text-[9px] font-sans font-bold px-1.5 py-0.5 rounded bg-amberGold/15 text-amberGold border border-amberGold/30 uppercase tracking-widest">
-                  Holding
-                </span>
-              </div>
-              <span className="text-[11px] text-slate-400 font-sans tracking-tight">
+              <span className="font-display font-bold text-base sm:text-lg tracking-wider text-white">
+                AOL-DOMO
+              </span>
+              <span className="text-xs text-amberGold font-serif italic tracking-wide">
                 Creer es crear!!!
               </span>
             </div>
