@@ -20,8 +20,8 @@ export default function LocationSection() {
   const [mapType, setMapType] = useState('m'); // 'm' for roadmap, 'k' for satellite
 
   const fullAddress = "Jr. Humberto Luna 105, Urb. Magisterial 1era etapa, Wanchaq, Cusco 05184, Perú";
-  const mapsSearchUrl = "https://www.google.com/maps/search/?api=1&query=Jr.+Humberto+Luna+105,+Urb.+Magisterial,+Cusco+05184";
-  const mapsDirectionsUrl = "https://www.google.com/maps/dir/?api=1&destination=Jr.+Humberto+Luna+105,+Urb.+Magisterial,+Cusco+05184";
+  const mapsSearchUrl = "https://maps.app.goo.gl/kDN5wRVRCuxck4jq7";
+  const mapsDirectionsUrl = "https://www.google.com/maps/dir/?api=1&destination=aol-domo,+-13.524152,-71.9489099";
   const whatsappVisitUrl = "https://wa.me/51944100990?text=" + encodeURIComponent(
     "Hola Rafael, deseo coordinar una visita o reunión presencial en la sede central de AOL-DOMO en Jr. Humberto Luna 105, Cusco."
   );
@@ -32,8 +32,10 @@ export default function LocationSection() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  // Google Maps embed URL with dynamic map type (roadmap vs satellite)
-  const embedUrl = `https://maps.google.com/maps?q=Jr.+Humberto+Luna+105,+Urb.+Magisterial,+Cusco+05184,+Peru&t=${mapType}&z=17&ie=UTF8&iwloc=&output=embed`;
+  // Google Maps embed URL using the official Google Place ID for aol-domo (centered street zoom)
+  const embedUrl = mapType === 'k'
+    ? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d-71.9489099!3d-13.524152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916e7f4bb46d96a9%3A0x28d69ba16952ccbe!2saol-domo!5e1!3m2!1ses!2spe!4v1730770000000!5m2!1ses!2spe'
+    : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d-71.9489099!3d-13.524152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916e7f4bb46d96a9%3A0x28d69ba16952ccbe!2saol-domo!5e0!3m2!1ses!2spe!4v1730770000000!5m2!1ses!2spe';
 
   return (
     <section id="ubicacion" className="py-16 sm:py-24 bg-obsidian-950 relative border-t border-white/5 overflow-hidden">
@@ -191,7 +193,7 @@ export default function LocationSection() {
 
           </div>
 
-          {/* Right Column: Google Maps Interactive Embed */}
+          {/* Right Column: Google Maps Interactive Embed Centered on AOL-DOMO */}
           <div className="lg:col-span-7 flex flex-col">
             <div className="glass-panel p-2.5 sm:p-4 rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl flex-1 flex flex-col relative">
               
@@ -202,8 +204,8 @@ export default function LocationSection() {
                   <span className="text-xs sm:text-sm font-bold text-white">
                     Google Maps en Vivo
                   </span>
-                  <span className="text-xs text-slate-400 hidden sm:inline">
-                    • Jr. Humberto Luna 105, Cusco
+                  <span className="text-xs text-amberGold font-semibold">
+                    • Sede Central AOL-DOMO
                   </span>
                 </div>
 
@@ -281,8 +283,8 @@ export default function LocationSection() {
 
               {/* Footer caption */}
               <div className="pt-3 px-2 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
-                <span>📍 Ubicación verificada: Urb. Magisterial, Wanchaq, Cusco (05184)</span>
-                <span className="text-slate-500">Toca y desplázate libremente para ver el entorno</span>
+                <span>📍 Ubicación exacta: Jr. Humberto Luna 105, Urb. Magisterial, Cusco (05184)</span>
+                <span className="text-slate-500">Centrado en la sede de AOL-DOMO</span>
               </div>
 
             </div>
