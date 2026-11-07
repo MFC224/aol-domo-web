@@ -1,0 +1,6 @@
+# robots.txt for AOL-DOMO
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.aol-domo.com/sitemap.xml
